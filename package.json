@@ -1,0 +1,24 @@
+{
+  "name": "otaku-rhythm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shsk000/otaku-rhythm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shsk000/otaku-rhythm/issues"
+  },
+  "homepage": "https://github.com/shsk000/otaku-rhythm#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  }
+}
