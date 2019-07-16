@@ -4,6 +4,7 @@
     <title>socket.io chat</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/firebase.js"></script>
 </head>
 <body>
     <ul id="messages"></ul>
@@ -12,13 +13,26 @@
     </form>
   <script>
       var socketio = io();
+
+      function format() {
+        d = new Date();
+        hh = d.getHours();
+        mm = d.getMinutes();
+        ss = d.getSeconds();
+        dd = d.getMilliseconds();
+        console.log( hh + ":" + ss + ":" + mm + ":" + dd);
+      }
       $(function(){
           $('#message_form').submit(function(){
+            console.log('message submit');
+            format(new Date(performance.timeOrigin));
             socketio.emit('message', $('#input_msg').val());
             $('#input_msg').val('');
             return false;
           });
           socketio.on('message',function(msg){
+            console.log('message retrive');
+            format(new Date(performance.timeOrigin));
             $('#messages').append($('<li>').text(msg));
           });
         });
