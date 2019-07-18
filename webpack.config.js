@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'build/client')
+    path: path.join(__dirname, 'build/client'),
   },
   devServer: {
     contentBase: path.join(__dirname, 'build'),
@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/client/index.html'
-    })
-  ]
+      template: 'src/client/index.html',
+    }),
+  ],
 };
