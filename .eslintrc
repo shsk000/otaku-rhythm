@@ -15,5 +15,9 @@
         "trailingComma": "es5"
       }
     ]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2017
   }
 }
