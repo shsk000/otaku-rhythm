@@ -29,10 +29,16 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket) {
+io.on('connection', socket => {
+  console.log(socket.id);
+
   socket.on('message', function(msg) {
     console.log('message: ' + msg);
     io.emit('message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(socket.id);
   });
 });
 
