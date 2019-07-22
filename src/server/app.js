@@ -30,7 +30,7 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', socket => {
-  console.log(socket.id);
+  console.log(`connection : ${socket.id}`);
 
   socket.on('message', function(msg) {
     console.log('message: ' + msg);
@@ -38,7 +38,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    console.log(socket.id);
+    console.log(`disconnect : ${socket.id}`);
   });
 });
 
