@@ -1,2 +1,14 @@
-console.log('test');
-console.log('test2');
+import io from 'socket.io-client';
+
+var socketio = io('/');
+
+$(function() {
+  $('#message_form').submit(function() {
+    socketio.emit('message', $('#input_msg').val());
+    $('#input_msg').val('');
+    return false;
+  });
+  socketio.on('message', function(msg) {
+    $('#messages').append($('<li>').text(msg));
+  });
+});
