@@ -19,17 +19,15 @@ class PlayerController {
 
   onServerPlayVideo() {
     socket.on('ServerPlay', () => {
-      // Playerに通知して動画を再生する
       this.player.play();
     });
   }
 
   onServerLoadVideo() {
     socket.on('ServerLoad', videoId => {
-      // Playerに通知して動画を読み込む
       const promise = this.player.load(videoId);
       promise.then(() => {
-        this.emitPlayVideoStatus(true);
+        this.emitPlayableVideoStatus(true);
       });
     });
   }
@@ -40,11 +38,11 @@ class PlayerController {
     });
   }
 
-  emitPlayVideo() {
-    socket.emit('ClientPlay');
+  emitPlayVideo(videoId) {
+    socket.emit('ClientPlay', videoId);
   }
 
-  emitPlayVideoStatus(status) {
+  emitPlayableVideoStatus(status) {
     socket.emit('ClientPlayableVideoStatus', status);
   }
 }

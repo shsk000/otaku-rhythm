@@ -32,6 +32,23 @@ class Room {
   emitVideoStop() {}
   onPlayableVideoStatus() {}
   onVideoPlay() {}
+
+  changePlayableVideoStatus(socketId, status) {
+    if (!socketId)
+      throw new Error('Room.changePlayableVideoStatus: invalid params');
+
+    if (socketId in this.users) {
+      this.users[socketId].changePlayableVideoStatus(status);
+
+      const keys = Object.keys(this.users);
+      let flag = false;
+      keys.forEach(socketId => {
+        flag = this.users[socketId].isPlayableVideoStatus;
+      });
+
+      this.isAllUserPlayableVideoStatus = flag;
+    }
+  }
 }
 
 module.exports = Room;

@@ -7,7 +7,9 @@ class User {
     this.isPlayableVideoStatus = false;
   }
 
-  changePlayableVideoStatus() {}
+  changePlayableVideoStatus(status) {
+    this.isPlayableVideoStatus = status;
+  }
 }
 
 module.exports = User;
