@@ -13,7 +13,11 @@ class Player {
   load(videoId) {
     if (!videoId) throw new Error('Player.load: invalid params');
 
-    this.apiAdapter.load(videoId);
+    console.log(`Player.load: start load video`);
+    const loadPromise = this.apiAdapter.load(videoId);
+    loadPromise.then(() => {
+      console.log(`Player.load: loaded video`);
+    });
   }
 }
 

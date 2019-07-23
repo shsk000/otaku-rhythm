@@ -10,7 +10,7 @@ console.log(c);
 
 // player test code
 const p = new Player();
-p.load('test');
+p.load('M7lc1UVf-VE');
 
 $(function() {
   $('#message_form').submit(function() {
