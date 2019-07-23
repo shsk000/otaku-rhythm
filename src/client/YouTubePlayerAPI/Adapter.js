@@ -23,7 +23,9 @@ class YouTubePlayerAPIAdapter {
     return promise;
   }
 
-  play() {}
+  play() {
+    this.api.playVideo();
+  }
 }
 
 export default YouTubePlayerAPIAdapter;
