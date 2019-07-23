@@ -1,4 +1,5 @@
 const express = require('express');
+// const path = require('path');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -9,8 +10,17 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../../webpack.config');
 
+const Room = require('./Room');
+const singleRoom = new Room('default');
+
+// express setting
 app.use(express.static('../../build'));
 
+// app.get('/', function(req, res) {
+//   res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+// });
+
+// env:development hot-reload setting
 if (process.env.NODE_ENV) {
   config.entry.app.unshift(
     'webpack-hot-middleware/client?reload=true&timeout=1000'
@@ -25,12 +35,10 @@ if (process.env.NODE_ENV) {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
 io.on('connection', socket => {
   console.log(`connection : ${socket.id}`);
+
+  singleRoom.joinUser(socket.id);
 
   socket.on('message', function(msg) {
     console.log('message: ' + msg);
@@ -39,6 +47,7 @@ io.on('connection', socket => {
 
   socket.on('disconnect', () => {
     console.log(`disconnect : ${socket.id}`);
+    singleRoom.withdrawalUser(socket.id);
   });
 });
 
