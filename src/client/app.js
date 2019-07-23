@@ -1,6 +1,10 @@
-import io from 'socket.io-client';
+import createSocket from './lib/createSocket';
+import PlayerController from './Controller/PlayerController';
 
-var socketio = io('/');
+const socketio = createSocket();
+
+const p = new PlayerController();
+console.log(p);
 
 $(function() {
   $('#message_form').submit(function() {
