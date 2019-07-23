@@ -40,13 +40,14 @@ io.on('connection', socket => {
 
   singleRoom.joinUser(socket.id);
 
-  // test code
+  // === test code =======
   setTimeout(() => {
     socket.emit('ServerLoad', 'M7lc1UVf-VE');
   }, 3000);
   socket.on('ClientPlayableVideoStatus', () => {
     socket.emit('ServerPlay');
   });
+  // ====================
 
   socket.on('message', function(msg) {
     console.log('message: ' + msg);
