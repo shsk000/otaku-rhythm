@@ -41,18 +41,17 @@ io.on('connection', socket => {
   singleRoom.joinUser(socket.id);
 
   // === test code =======
-  setTimeout(() => {
-    socket.emit('ServerLoad', 'M7lc1UVf-VE');
-  }, 3000);
+  socket.on('ClientPlay', videoId => {
+    io.emit('ServerLoad', videoId);
+  });
   socket.on('ClientPlayableVideoStatus', () => {
-    socket.emit('ServerPlay');
+    singleRoom.changePlayableVideoStatus(socket.id, true);
+
+    if (singleRoom.isAllUserPlayableVideoStatus) {
+      io.emit('ServerPlay');
+    }
   });
   // ====================
-
-  socket.on('message', function(msg) {
-    console.log('message: ' + msg);
-    io.emit('message', msg);
-  });
 
   socket.on('disconnect', () => {
     console.log(`disconnect : ${socket.id}`);

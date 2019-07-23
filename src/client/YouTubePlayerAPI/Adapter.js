@@ -14,13 +14,20 @@ class YouTubePlayerAPIAdapter {
       throw new Error('YouTubePlayerAPIAdapter.constructor: invalid params');
 
     this.videoId = videoId;
-
+    // TODO: データロードまで進んでいない
     const promise = this.api.loadVideoById(videoId);
     this.api.stopVideo();
 
     console.log(`YouTubePlayerAPIAdapter.load: ${this.videoId}`);
 
-    return promise;
+    return new Promise(resolve => {
+      promise.then(() => {
+        // TODO: 検証のためsetTimeout追加
+        setTimeout(() => {
+          resolve();
+        }, 5000);
+      });
+    });
   }
 
   play() {

@@ -38,8 +38,8 @@ class PlayerController {
     });
   }
 
-  emitPlayVideo() {
-    socket.emit('ClientPlay');
+  emitPlayVideo(videoId) {
+    socket.emit('ClientPlay', videoId);
   }
 
   emitPlayableVideoStatus(status) {

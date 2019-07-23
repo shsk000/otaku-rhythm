@@ -1,24 +1,24 @@
 import createSocket from './lib/createSocket';
 import PlayerController from './Controller/PlayerController';
-import Player from './Player/Player';
+// import Player from './Player/Player';
 
-const socketio = createSocket();
+// const socketio = createSocket();
 
 // playerController test code
 const c = new PlayerController();
 console.log(c);
 
 // player test code
-const p = new Player();
+// const p = new Player();
 // p.load('M7lc1UVf-VE');
 
 $(function() {
   $('#message_form').submit(function() {
-    socketio.emit('message', $('#input_msg').val());
-    $('#input_msg').val('');
+    const value = $(this)
+      .find('#input_msg')
+      .val();
+
+    c.emitPlayVideo(value);
     return false;
-  });
-  socketio.on('message', function(msg) {
-    $('#messages').append($('<li>').text(msg));
   });
 });
