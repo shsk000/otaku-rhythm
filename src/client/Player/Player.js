@@ -2,7 +2,6 @@ import YouTubePlayerAPIAdapter from '../YouTubePlayerAPI/Adapter';
 
 class Player {
   constructor() {
-    this.isPlayable = false;
     this.apiAdapter = new YouTubePlayerAPIAdapter();
   }
 
@@ -23,6 +22,8 @@ class Player {
 
     return promise;
   }
+
+  stop() {}
 }
 
 export default Player;
