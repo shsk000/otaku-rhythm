@@ -1,4 +1,5 @@
 const User = require('./User');
+const io = require('./lib/createIo')();
 
 class Room {
   constructor(roomName = '') {
@@ -28,11 +29,13 @@ class Room {
     return false;
   }
 
-  emitVideoLoad() {}
-  emitVideoPlay() {}
+  emitVideoLoad(videoId) {
+    io.emit('ServerLoad', videoId);
+  }
+  emitVideoPlay() {
+    io.emit('ServerPlay');
+  }
   emitVideoStop() {}
-  onPlayableVideoStatus() {}
-  onVideoPlay() {}
 
   changePlayableVideoStatus(socketId, status) {
     if (!socketId)
@@ -48,6 +51,11 @@ class Room {
       });
 
       this.isAllUserPlayableVideoStatus = flag;
+
+      if (this.isAllUserPlayableVideoStatus) {
+        this.changeAllUserPlayableVideoStatus(false);
+        this.emitVideoPlay();
+      }
     }
   }
 

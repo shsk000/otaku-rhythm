@@ -2,7 +2,9 @@ import YTPlayer from 'yt-player';
 
 class YouTubePlayerAPIAdapter {
   constructor() {
-    this.api = new YTPlayer('#app');
+    this.api = new YTPlayer('#app', {
+      controls: false,
+    });
   }
 
   load(videoId) {

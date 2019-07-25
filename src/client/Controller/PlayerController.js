@@ -5,7 +5,6 @@ const socket = createSocket();
 
 class PlayerController {
   constructor() {
-    this.isPlayableVideo = false;
     this.player = new Player();
 
     this.onSocketEvent();
