@@ -2,7 +2,7 @@ const express = require('express');
 // const path = require('path');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('./lib/createIo')(http);
 const PORT = 8080;
 
 const webpack = require('webpack');
@@ -40,19 +40,13 @@ io.on('connection', socket => {
 
   singleRoom.joinUser(socket.id);
 
-  // === test code =======
   socket.on('ClientPlay', videoId => {
-    io.emit('ServerLoad', videoId);
+    singleRoom.emitVideoLoad(videoId);
   });
+
   socket.on('ClientPlayableVideoStatus', () => {
     singleRoom.changePlayableVideoStatus(socket.id, true);
-
-    if (singleRoom.isAllUserPlayableVideoStatus) {
-      singleRoom.changeAllUserPlayableVideoStatus(false);
-      io.emit('ServerPlay');
-    }
   });
-  // ====================
 
   socket.on('disconnect', () => {
     console.log(`disconnect : ${socket.id}`);
