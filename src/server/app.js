@@ -48,6 +48,7 @@ io.on('connection', socket => {
     singleRoom.changePlayableVideoStatus(socket.id, true);
 
     if (singleRoom.isAllUserPlayableVideoStatus) {
+      singleRoom.changeAllUserPlayableVideoStatus(false);
       io.emit('ServerPlay');
     }
   });

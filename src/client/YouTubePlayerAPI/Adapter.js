@@ -1,12 +1,8 @@
-import YouTubePlayer from 'youtube-player';
+import YTPlayer from 'yt-player';
 
 class YouTubePlayerAPIAdapter {
   constructor() {
-    this.api = new YouTubePlayer('app', {
-      playerVars: {
-        autoplay: 0,
-      },
-    });
+    this.api = new YTPlayer('#app');
   }
 
   load(videoId) {
@@ -14,24 +10,24 @@ class YouTubePlayerAPIAdapter {
       throw new Error('YouTubePlayerAPIAdapter.constructor: invalid params');
 
     this.videoId = videoId;
-    // TODO: データロードまで進んでいない
-    const promise = this.api.loadVideoById(videoId);
-    this.api.stopVideo();
 
+    this.api.load(videoId, true);
     console.log(`YouTubePlayerAPIAdapter.load: ${this.videoId}`);
 
     return new Promise(resolve => {
-      promise.then(() => {
-        // TODO: 検証のためsetTimeout追加
+      this.api.once('playing', () => {
+        this.api.seek(0);
+        this.api.pause();
         setTimeout(() => {
           resolve();
-        }, 5000);
+        }, 1000);
       });
     });
   }
 
   play() {
-    this.api.playVideo();
+    console.log(`YouTubePlayerAPIAdapter.play: play video`);
+    this.api.play();
   }
 }
 

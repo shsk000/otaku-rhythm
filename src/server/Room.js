@@ -27,6 +27,7 @@ class Room {
 
     return false;
   }
+
   emitVideoLoad() {}
   emitVideoPlay() {}
   emitVideoStop() {}
@@ -48,6 +49,17 @@ class Room {
 
       this.isAllUserPlayableVideoStatus = flag;
     }
+  }
+
+  changeAllUserPlayableVideoStatus(status) {
+    const keys = Object.keys(this.users);
+    keys.forEach(socketId => {
+      this.users[socketId].isPlayableVideoStatus = status;
+    });
+
+    console.log('Room.changePlayableVideoStatus', this.users);
+
+    this.isAllUserPlayableVideoStatus = status;
   }
 }
 

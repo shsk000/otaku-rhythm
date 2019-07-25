@@ -7,6 +7,7 @@ class Player {
   }
 
   play() {
+    console.log(`Player.play: play video`);
     this.apiAdapter.play();
   }
 
