@@ -24,7 +24,7 @@ class PlayerController {
   }
 
   onServerLoadVideo() {
-    socket.on('ServerLoad', async videoId => {
+    socket.on('ServerLoad', videoId => {
       const promise = this.player.load(videoId);
       promise.then(() => {
         this.emitPlayableVideoStatus(true);
